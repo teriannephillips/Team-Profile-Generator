@@ -1,38 +1,58 @@
 const fs = require('fs');
 
 const managerSection = (data) => {
-    return `<section class="manager">
-    <h1>Manager</h1>
-    <h3>Name: ${data[0].name}</h3>
-    <h3>Employee Id: ${data[0].id}</h3>
-    <h3>E-mail: ${data[0].email}</h3>
-    <h3>Office Number: ${data[0].officeNum}</h3>
-    </section>`
+    return `
+    <div class="card" style="width: 25%; margin: 4%">
+        <div class="card-body">
+            <div class="card-top">
+                <h1 class="card-title">${data[0].name}</h1>
+                <h3 class="card-subtitle">Manager</h3>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Id: ${data[0].id}</li>
+                <li class="list-group-item">E-mail: ${data[0].email}</li>
+                <li class="list-group-item">Tel: ${data[0].officeNum}</li>
+            </ul>
+        </div>
+    </div>`
 }
 
 const employeeSection = (data) => {
-    let employeeData ="";
+    let employeeData = "";
     for (let i = 0; i < data.length; i++) {
         if (data[i].github) {
-            console.log(data[i].name);
-            employeeData = employeeData.concat(`<section class="engineer">
-           <h1>Engineer</h1>
-           <h3>Name: ${data[i].name}</h3>
-           <h3>Employee Id: ${data[i].id}</h3>
-           <h3>E-mail: ${data[i].email}</h3>
-           <h3>Github Username: ${data[i].github}</h3>
-           </section>`)
+            employeeData = employeeData.concat(`
+            <div class="card" style="width: 25%; margin: 4%">
+                <div class="card-body">
+                    <div class="card-top">
+                        <h1 class="card-title">${data[i].name}</h1>
+                        <h3 class="card-subtitle">Engineer</h3>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Id: ${data[i].id}</li>
+                        <li class="list-group-item">E-mail: ${data[i].email}</li>
+                        <li class="list-group-item">Github: ${data[i].github}</li>
+                    </ul>
+                </div>
+            </div > `)
         } else if (data[i].school) {
-            employeeData = employeeData.concat(`<section class="intern">
-           <h1>Intern</h1>
-           <h3>Name: ${data[i].name}</h3>
-           <h3>Employee Id: ${data[i].id}</h3>
-           <h3>E-mail: ${data[i].email}</h3>
-           <h3>School: ${data[i].school}</h3>
-           </section>`)
-        }
+            employeeData = employeeData.concat(`
+            <div class="card" style="width: 25%; margin: 4%" >
+            <div class="card-body">
+                <div class="card-top">
+                    <h1 class="card-title">${data[i].name}</h1>
+                    <h3 class="card-subtitle">Intern</h3>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Id: ${data[i].id}</li>
+                    <li class="list-group-item">E-mail: ${data[i].email}</li>
+                    <li class="list-group-item">School: ${data[i].school}</li>
+                </ul>
+            </div>
+        </div > `)
+}
     }
-    return employeeData;
+return employeeData;
 }
 
 const generatePage = data => {
@@ -43,12 +63,15 @@ const generatePage = data => {
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="" />
+        <link rel="stylesheet" href="./style.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
         <title>Team Profile Generator</title>
     </head>
     <body>
         <header>
+        <h1>Team Page</h1>
         </header>
-        <div class="content">
+        <div class="container">
                 ${managerSection(data)}
                 ${employeeSection(data)}
         </div>

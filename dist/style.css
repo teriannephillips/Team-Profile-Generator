@@ -1,0 +1,18 @@
+header {
+    text-align: center;
+    background-color: blueviolet;
+    padding: 2%;
+    color: white;
+}
+.card-top {
+    background-color: blueviolet;
+    color: white;
+    padding-left: 1%;
+}
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    align-content: center;
+}
