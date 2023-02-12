@@ -25,7 +25,7 @@ To use this code to generate your own team profile, **git clone** the repo so yo
 
 ---
 ## Usage
-[View  my walk through video](https://youtubelink)<br>
+[View  my walk through video](https://youtu.be/z9VZSbeDK5k)<br>
 In the command line enter **node index.js** to start the application. Answer the prompts in your command line to generate the Team Profile index.html file. After answering all the prompts, your HTML file will be named 'index.html' and will be ready for you in the /dist folder.<br>
 <br>
 **Sample Team Profile**<br>
