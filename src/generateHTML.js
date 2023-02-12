@@ -32,7 +32,7 @@ const employeeSection = (data) => {
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">Id: ${data[i].id}</li>
                         <li class="list-group-item">E-mail: <a href="mailto:${data[i].email}">${data[i].email}</a></li>
-                        <li class="list-group-item">Github: <a href ="https://github.com/${data[i].github}">${data[i].github}</li>
+                        <li class="list-group-item">Github: <a href ="https://github.com/${data[i].github}">${data[i].github}</a></li>
                     </ul>
                 </div>
             </div > `)
