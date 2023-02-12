@@ -2,20 +2,19 @@
 const fs = require('fs');
 //creates and returns the string literal for the manager data
 const managerSection = (data) => {
-    return `
-    <div class="card "style="width: 18rem; min-height:15rem; margin: 4%">
-        <div class="card-body">
-            <div class="card-top">
-                <h3 class="card-title">${data[0].name}</h3>
-                <h5 class="card-subtitle">Manager</h5>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Id: ${data[0].id}</li>
-                <li class="list-group-item">E-mail: <a href="mailto:${data[0].email}">${data[0].email}</a></li>
-                <li class="list-group-item">Tel: ${data[0].officeNum}</li>
-            </ul>
-        </div>
-    </div>`
+    return `<div class="card "style="width: 18rem; min-height:15rem; margin: 4%">
+                <div class="card-body">
+                    <div class="card-top">
+                        <h3 class="card-title">${data[0].name}</h3>
+                        <h5 class="card-subtitle">Manager</h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Id: ${data[0].id}</li>
+                        <li class="list-group-item">E-mail: <a href="mailto:${data[0].email}">${data[0].email}</a></li>
+                        <li class="list-group-item">Tel: <a href="tel:${data[0].officeNum}">${data[0].officeNum}</a></li>
+                    </ul>
+                </div>
+            </div>`
 }
 //creates and returns the string literal for the rest of the employee data
 const employeeSection = (data) => {
@@ -32,7 +31,7 @@ const employeeSection = (data) => {
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">Id: ${data[i].id}</li>
                         <li class="list-group-item">E-mail: <a href="mailto:${data[i].email}">${data[i].email}</a></li>
-                        <li class="list-group-item">Github: <a href ="https://github.com/${data[i].github}">${data[i].github}</a></li>
+                        <li class="list-group-item">Github: <a href ="https://github.com/${data[i].github}"  target="_blank">${data[i].github}</a></li>
                     </ul>
                 </div>
             </div > `)
@@ -56,7 +55,7 @@ const employeeSection = (data) => {
     }
     return employeeData;
 }
-//generates the html page and added the string literals for manager and employees
+//generates the html page and adds the string literals for manager and employees
 const generatePage = data => {
     return `
 <!DOCTYPE html>
@@ -83,7 +82,7 @@ const generatePage = data => {
 //function to write the HTML file
 function writeToFile(data) {
     fs.writeFile('./dist/index.html', generatePage(data), err => {
-        err ? console.error(err) : console.log('Success!')
+        err ? console.error(err) : console.log('Your index.html file has been created and is located in the /dist folder!')
     });
 }
 module.exports = { writeToFile, generatePage};
