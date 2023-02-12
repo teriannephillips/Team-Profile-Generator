@@ -1,14 +1,15 @@
+//required modules I created
 const Manager = require('./lib/manager');
 const Engineer = require('./lib/engineer');
 const Intern = require('./lib/intern');
-const { generatePage } = require('./src/generateHTML');
-//required packages
+const { writeToFile } = require('./src/generateHTML');
+//required packages others have created
 const inquirer = require("inquirer")
 const fs = require('fs');
 const { default: Choices } = require("inquirer/lib/objects/choices");
-const { writeToFile } = require('./src/generateHTML');
+//global variables
 let employeeArray = [];
-
+//function to ask the manager questions
 function managerQuestions() {
   inquirer.prompt([
     {
@@ -33,12 +34,12 @@ function managerQuestions() {
     },
   ]).then(answers => {
     const {name, id, email, officeNum} = answers
-    const manager = new Manager(name, id, email, officeNum
-    );
+    const manager = new Manager(name, id, email, officeNum);
     addEmployee(manager);
     positionOption();
   });
 }
+//function to ask the engineer questions
 function engineerQuestions() {
   inquirer.prompt([
     {
@@ -67,6 +68,7 @@ function engineerQuestions() {
     positionOption();
   });
 }
+//function to ask the intern questions
 function internQuestions() {
   inquirer.prompt([
     {
@@ -95,8 +97,8 @@ function internQuestions() {
     positionOption();
   });
 }
+//function to determine if more employees need to be added and if so which one (engineer, intern or done)
 function positionOption() {
-  console.log(employeeArray)
   inquirer.prompt([
     {
       type: 'list',
@@ -108,15 +110,15 @@ function positionOption() {
     //call the function to ask the employee questions again
     console.log(answers.position);
     if (answers.position == "done") {
-      // need team array
-      console.log(generatePage(employeeArray))
-      console.log(employeeArray)
+      //runs the function to write to the HTML file when they select done
       return writeToFile(employeeArray);
     }
     else if (answers.position == "engineer") {
+      //ask the engineer questions
       engineerQuestions();
     }
     else if (answers.position == "intern") {
+      //ask the intern questions
       internQuestions();
     }
 
@@ -127,8 +129,3 @@ managerQuestions();
 function addEmployee(data) {
 employeeArray.push(data);
 }
-//function to write the HTML file
-//generatePage(employeeArray);
-// function writeToFile(fileName, answers) {
-//   console.log(answers);
-// }

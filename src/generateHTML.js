@@ -1,60 +1,62 @@
+//required packages
 const fs = require('fs');
-
+//creates and returns the string literal for the manager data
 const managerSection = (data) => {
     return `
-    <div class="card" style="width: 25%; margin: 4%">
+    <div class="card "style="width: 18rem; min-height:15rem; margin: 4%">
         <div class="card-body">
             <div class="card-top">
-                <h1 class="card-title">${data[0].name}</h1>
-                <h3 class="card-subtitle">Manager</h3>
+                <h3 class="card-title">${data[0].name}</h3>
+                <h5 class="card-subtitle">Manager</h5>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Id: ${data[0].id}</li>
-                <li class="list-group-item">E-mail: ${data[0].email}</li>
+                <li class="list-group-item">E-mail: <a href="mailto:${data[0].email}">${data[0].email}</a></li>
                 <li class="list-group-item">Tel: ${data[0].officeNum}</li>
             </ul>
         </div>
     </div>`
 }
-
+//creates and returns the string literal for the rest of the employee data
 const employeeSection = (data) => {
     let employeeData = "";
     for (let i = 0; i < data.length; i++) {
         if (data[i].github) {
             employeeData = employeeData.concat(`
-            <div class="card" style="width: 25%; margin: 4%">
+            <div class="card "style="width: 18rem; min-height:15rem; margin: 4%">
                 <div class="card-body">
                     <div class="card-top">
-                        <h1 class="card-title">${data[i].name}</h1>
-                        <h3 class="card-subtitle">Engineer</h3>
+                        <h3 class="card-title">${data[i].name}</h3>
+                        <h5 class="card-subtitle">Engineer</h5>
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">Id: ${data[i].id}</li>
-                        <li class="list-group-item">E-mail: ${data[i].email}</li>
-                        <li class="list-group-item">Github: ${data[i].github}</li>
+                        <li class="list-group-item">E-mail: <a href="mailto:${data[i].email}">${data[i].email}</a></li>
+                        <li class="list-group-item">Github: <a href ="https://github.com/${data[i].github}">${data[i].github}</li>
                     </ul>
                 </div>
             </div > `)
-        } else if (data[i].school) {
+        } 
+        else if (data[i].school) {
             employeeData = employeeData.concat(`
-            <div class="card" style="width: 25%; margin: 4%" >
-            <div class="card-body">
-                <div class="card-top">
-                    <h1 class="card-title">${data[i].name}</h1>
-                    <h3 class="card-subtitle">Intern</h3>
+            <div class="card "style="width: 18rem; min-height:15rem; margin: 4%">
+                <div class="card-body">
+                    <div class="card-top">
+                        <h3 class="card-title">${data[i].name}</h3>
+                        <h5 class="card-subtitle">Intern</h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Id: ${data[i].id}</li>
+                        <li class="list-group-item">E-mail: <a href="mailto:${data[i].email}">${data[i].email}</a></li>
+                        <li class="list-group-item">School: ${data[i].school}</li>
+                    </ul>
                 </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Id: ${data[i].id}</li>
-                    <li class="list-group-item">E-mail: ${data[i].email}</li>
-                    <li class="list-group-item">School: ${data[i].school}</li>
-                </ul>
-            </div>
-        </div > `)
-}
+            </div > `)
+        }   
     }
-return employeeData;
+    return employeeData;
 }
-
+//generates the html page and added the string literals for manager and employees
 const generatePage = data => {
     return `
 <!DOCTYPE html>
@@ -71,18 +73,17 @@ const generatePage = data => {
         <header>
         <h1>Team Page</h1>
         </header>
-        <div class="container">
+        <div class="content">
                 ${managerSection(data)}
                 ${employeeSection(data)}
         </div>
     </body>
 </html>
 `};
-
 //function to write the HTML file
 function writeToFile(data) {
     fs.writeFile('./dist/index.html', generatePage(data), err => {
         err ? console.error(err) : console.log('Success!')
     });
 }
-module.exports = { writeToFile, generatePage };
+module.exports = { writeToFile, generatePage};
